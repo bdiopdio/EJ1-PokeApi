@@ -87,4 +87,4 @@ Si el sitio se carga pero se ve como texto plano (sin diseño), verifica que la 
 
 Para ver el funcionamiento de la aplicación (listado, paginación, navegación a detalles y persistencia del offset), puedes consultar el siguiente vídeo:
 
-<video src="demo.mp4" width="800"></video>
+![Ve el vídeo aquí](https://github.com/bdiopdio/EJ1-PokeApi/raw/refs/heads/main/demo.mp4)
