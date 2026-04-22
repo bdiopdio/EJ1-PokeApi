@@ -1,0 +1,58 @@
+<?php
+
+/**
+ * @file
+ * Contains pokeapi_integration.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function pokeapi_integration_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    case 'help.page.pokeapi_integration':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Integrates with the PokeAPI to fetch and display Pokémon data.') . '</p>';
+      $output .= '<h3>' . t('Uses') . '</h3>';
+      $output .= '<dl>';
+      $output .= '<dt>' . t('Viewing Pokémon List') . '</dt>';
+      $output .= '<dd>' . t('Visit /pokemon to see a list of all Pokémon.') . '</dd>';
+      $output .= '<dt>' . t('Viewing Pokémon Details') . '</dt>';
+      $output .= '<dd>' . t('Click on any Pokémon from the list to view detailed information.') . '</dd>';
+      $output .= '</dl>';
+      return $output;
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function pokeapi_integration_theme($existing, $type, $theme, $path) {
+  return [
+    'pokemon_list' => [
+      'variables' => [
+        'no_connection' => FALSE,
+        'has_next' => FALSE,
+        'has_previous' => FALSE,
+        'pokemons' => [],
+        'next_url' => NULL,
+        'previous_url' => NULL,
+        'next_offset' => 0,
+        'prev_offset' => 0,
+        'from_offset' => 0,
+        'current_page' => 1,
+        'total_pages' => 1,
+      ],
+      'template' => 'pokemon-list',
+    ],
+    'pokemon_detail' => [
+      'variables' => [
+        'pokemon' => NULL,
+      ],
+      'template' => 'pokemon-detail',
+    ],
+  ];
+}

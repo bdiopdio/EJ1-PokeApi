@@ -1,0 +1,20 @@
+pokeapi_integration.pokemon_list:
+  path: '/pokemon'
+  defaults:
+    _controller: '\Drupal\pokeapi_integration\Controller\PokemonListController::list'
+    _title: 'Pokémon List'
+  requirements:
+    _permission: 'access content'
+
+pokeapi_integration.pokemon_detail:
+  path: '/pokemon/{id}'
+  defaults:
+    _controller: '\Drupal\pokeapi_integration\Controller\PokemonDetailController::detail'
+    _title_callback: '\Drupal\pokeapi_integration\Controller\PokemonDetailController::getTitle'
+  requirements:
+    _permission: 'access content'
+    id: '\d+'
+  options:
+    parameters:
+      id:
+        type: integer

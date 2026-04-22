@@ -1,0 +1,5 @@
+name: 'PokeAPI Integration'
+description: 'Integrates with the PokeAPI to fetch and display Pokémon data.'
+type: module
+core_version_requirement: '^9 || ^10 || ^11'
+package: 'Custom'

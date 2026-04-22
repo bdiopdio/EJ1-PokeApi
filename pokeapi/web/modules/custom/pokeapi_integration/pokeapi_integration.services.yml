@@ -1,0 +1,4 @@
+services:
+  pokeapi_integration.client:
+    class: Drupal\pokeapi_integration\Service\PokeApiClient
+    arguments: ['@http_client', '@cache.default', '@logger.factory']

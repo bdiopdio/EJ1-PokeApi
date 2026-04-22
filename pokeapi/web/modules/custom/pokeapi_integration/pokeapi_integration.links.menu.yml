@@ -1,0 +1,7 @@
+# Menu links for PokeAPI Integration module
+
+pokeapi_integration.pokemon_list:
+  title: 'Pokédex'
+  route_name: pokeapi_integration.pokemon_list
+  menu_name: main
+  weight: 0

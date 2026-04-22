@@ -1,0 +1,80 @@
+{#
+/**
+ * @file
+ * Template for displaying a list of Pokémon.
+ *
+ * Available variables:
+ * - pokemons: Array of Pokémon with id, name, and url.
+ * - current_offset: Current offset value.
+ * - next_offset: Next offset value.
+ * - prev_offset: Previous offset value.
+ * - has_next: Boolean indicating if there's a next page.
+ * - has_previous: Boolean indicating if there's a previous page.
+ * - current_page: Current page number.
+ * - total_pages: Total number of pages.
+ */
+#}
+{% if no_connection %}
+  <div class="messages messages--error" style="background: #f8d7da; color: #721c24; padding: 20px; margin: 20px 0; border: 1px solid #f5c6cb;">
+    <strong>{{ 'Sin conexión'|t }}:</strong> {{ 'No se pudo establecer conexión con el servidor. Revisa tu conexión a internet.'|t }}
+  </div>
+{% else %}
+  <div class="pokemon-list-container">
+    <div class="pokemon-list-header">
+      <h1>Pokédex</h1>
+      <p>Descubre todos los Pokémon</p>
+    </div>
+
+    <div class="pokemon-grid">
+      {% for pokemon in pokemons %}
+        <div class="pokemon-card">
+          <a href="{{ path('pokeapi_integration.pokemon_detail', {'id': pokemon.id}) }}" class="pokemon-card-link">
+            <div class="pokemon-card-image">
+              <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/{{ pokemon.id }}.png" 
+                  alt="{{ pokemon.name }}" 
+                  loading="lazy">
+            </div>
+            <h2 class="pokemon-card-name">{{ pokemon.name }}</h2>
+            <p class="pokemon-card-id">#{{ '%04d'|format(pokemon.id) }}</p>
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+
+    <div class="pokemon-pagination">
+      {% if has_previous %}
+        <a href="{{ path('pokeapi_integration.pokemon_list', {'offset': prev_offset}) }}" class="pagination-button">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+          </svg>
+          Anterior
+        </a>
+      {% else %}
+        <span class="pagination-button disabled">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+          </svg>
+          Anterior
+        </span>
+      {% endif %}
+
+      <span class="pagination-info">Página {{ current_page }} de {{ total_pages }}</span>
+
+      {% if has_next %}
+        <a href="{{ path('pokeapi_integration.pokemon_list', {'offset': next_offset}) }}" class="pagination-button">
+          Siguiente
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+          </svg>
+        </a>
+      {% else %}
+        <span class="pagination-button disabled">
+          Siguiente
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+          </svg>
+        </span>
+      {% endif %}
+    </div>
+  </div>
+{% endif %}

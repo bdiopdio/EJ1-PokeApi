@@ -1,0 +1,114 @@
+{#
+/**
+ * @file
+ * Template for displaying Pokémon details.
+ *
+ * Available variables:
+ * - pokemon: Object with id, name, height, weight, image, sprites, abilities, types, and stats.
+ * - previous_id: ID of the previous Pokemon (if exists).
+ * - next_id: ID of the next Pokemon (if exists).
+ */
+#}
+<div class="pokemon-detail-container">
+  <div class="pokemon-detail-header">
+    <a href="{{ path('pokeapi_integration.pokemon_list', {'offset': from_offset}) }}" class="back-link">← Volver al Pokédex</a>
+  </div>
+
+  {# Navigation buttons #}
+  <div class="pokemon-navigation">
+    {% if previous_id %}
+      <a href="/pokemon/{{ previous_id }}" class="pokemon-nav-button pokemon-nav-prev">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+        <span>Anterior</span>
+      </a>
+    {% endif %}
+    {% if next_id %}
+      <a href="/pokemon/{{ next_id }}" class="pokemon-nav-button pokemon-nav-next">
+        <span>Siguiente</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </a>
+    {% endif %}
+  </div>
+
+  {# Compact Pokemon Detail Card #}
+  <div class="pokemon-detail-card">
+    <div class="pokemon-card-main">
+      {# Left side - Image #}
+      <div class="pokemon-image-section">
+        <div class="pokemon-image-wrapper">
+          <img src="{{ pokemon.image }}" alt="{{ pokemon.name }}" class="pokemon-main-img">
+        </div>
+      </div>
+
+      {# Right side - Info #}
+      <div class="pokemon-info-section">
+        <div class="pokemon-header-info">
+          <h1 class="pokemon-detail-name">{{ pokemon.name }}</h1>
+          <span class="pokemon-detail-id">#{{ '%04d'|format(pokemon.id) }}</span>
+        </div>
+
+        <div class="pokemon-types-row">
+          {% for type in pokemon.types %}
+            <span class="pokemon-type pokemon-type-{{ type|lower }}">{{ type }}</span>
+          {% endfor %}
+        </div>
+
+        <div class="pokemon-measurements-compact">
+          <div class="measure-box">
+            <span class="measure-label">Altura</span>
+            <span class="measure-value">{{ pokemon.height }} m</span>
+          </div>
+          <div class="measure-box">
+            <span class="measure-label">Peso</span>
+            <span class="measure-value">{{ pokemon.weight }} kg</span>
+          </div>
+        </div>
+
+        <div class="pokemon-abilities-compact">
+          <h4>Habilidades</h4>
+          <div class="abilities-row">
+            {% for ability in pokemon.abilities %}
+              <span class="ability-tag">{{ ability }}</span>
+            {% endfor %}
+          </div>
+        </div>
+        
+      </div>
+    </div>
+
+    {# Bottom - Sprites #}
+    <div class="pokemon-sprites-compact">
+      <h4>Formas</h4>
+      <div class="sprites-row">
+        {% if pokemon.sprites.front_default %}
+          <div class="sprite-box">
+            <img src="{{ pokemon.sprites.front_default }}" alt="Normal">
+            <span>Normal</span>
+          </div>
+        {% endif %}
+        {% if pokemon.sprites.front_shiny %}
+          <div class="sprite-box">
+            <img src="{{ pokemon.sprites.front_shiny }}" alt="Shiny">
+            <span>Shiny</span>
+          </div>
+        {% endif %}
+        {% if pokemon.sprites.back_default %}
+          <div class="sprite-box">
+            <img src="{{ pokemon.sprites.back_default }}" alt="Espalda">
+            <span>Espalda</span>
+          </div>
+        {% endif %}
+        {% if pokemon.sprites.back_shiny %}
+          <div class="sprite-box">
+            <img src="{{ pokemon.sprites.back_shiny }}" alt="Shiny Espalda">
+            <span>Shiny Espalda</span>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
