@@ -87,7 +87,4 @@ Si el sitio se carga pero se ve como texto plano (sin diseño), verifica que la 
 
 Para ver el funcionamiento de la aplicación (listado, paginación, navegación a detalles y persistencia del offset), puedes consultar el siguiente vídeo:
 
-[![Mira la demo aquí](https://shields.io)](demo.mp4)
-
-*Si tienes el vídeo en el propio repositorio, puedes embeberlo directamente así:*
-<!-- <video src="docs/demo.mp4" width="800"></video> -->
+<video src="demo.mp4" width="800"></video>
